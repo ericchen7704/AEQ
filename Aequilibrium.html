@@ -1,0 +1,453 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Aequilibrium</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            var castle = [2, 6, 6, 6, 3];
+            console.log("Math.max ", Math.max.apply(null, castle));
+            console.log("Math.min ", Math.min.apply(null, castle));
+            console.log("arrayMax ", arrayMax(castle));
+            console.log("arrayMin ", arrayMin(castle));
+           
+            $('.fp').click(function () {
+                $('.peaks').empty();
+                $('.peaks').append(arrayMax(castle));
+            });
+            $('.fv').click(function () {
+                $('.valleys').empty();
+                $('.valleys').append(arrayMin(castle));
+            });
+        });
+        function arrayMax(arr) {
+            var len = arr.length, max = -Infinity;
+            while (len--) {
+                if (arr[len] > max) {
+                    max = arr[len];
+
+                }
+            }
+            return max;
+        };
+        function arrayMin(arr) {
+            var len = arr.length, min = Infinity;
+            while (len--) {
+                if (arr[len] < min) {
+                    min = arr[len];
+                }
+            }
+            return min;
+        };
+    </script>
+</head>
+<body>
+    <style>
+        .fp,.fv{
+            background-color:#007AFF;
+        }
+        .peaks,.valleys{
+            color:red;
+            font-weight:bold;
+        }
+        .container{
+            max-width:1400px;
+            width:100%;
+        }
+    </style>
+    <div class="jumbotron text-center">
+        <h1>Aequilibrium | Technical Assignment</h1>
+        <p>Ching Chen (Eric) 2017-09-07</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <h2>
+                Part 1: Aequilibrium | The Castle Company
+            </h2>
+            <hr />
+            <div class="col-sm-6">
+                <h3>Array: [2,6,6,6,3]</h3>
+                <a  class="btn btn-info fp">Find Peaks</a>
+                <h3>Peaks: <span class="peaks"></span></h3>
+                <hr />
+                <div class="findpeaks">
+                    <p>To find peaks:</p>
+                   
+                    <pre>
+                        <code class="language-pascal">
+var castle = [2, 6, 6, 6, 3];                       
+
+function arrayMax(arr) {
+    var len = arr.length, max = -Infinity;
+    while (len--) {
+    if (arr[len] > max) {
+        max = arr[len];
+        }
+    }
+    return max;
+};
+                        </code>
+                    </pre>
+                    <p>Usage: </p>
+                    <pre>
+                        <code class="language-pascal">
+console.log("arrayMax ", arrayMax(castle));
+                            </code>
+                    </pre>
+                    <p>Output: </p>
+                    <pre>
+                    <code class="language-pascal">
+6
+                            </code>
+                    </pre>
+                    <div>
+                        <h3>Alternative way:</h3>
+                        <code>
+                            console.log("Math.max ", Math.max.apply(null, castle));
+                        </code>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h3>Array: [2,6,6,6,3]</h3>
+                <a class="btn btn-info fv">Find Valleys</a>
+                <h3>Valleys: <span class="valleys"></span></h3>
+                <hr />
+                <div class="findvalleys">
+                    <p>To find valleys:</p>
+
+                    <pre>
+                    <code class="language-pascal">
+var castle = [2, 6, 6, 6, 3];   
+                                            
+function arrayMin(arr) {
+var len = arr.length, min = Infinity;
+    while (len--) {
+        if (arr[len] < min) {
+            min = arr[len];
+            }
+        }
+        return min;
+};
+                        </code>
+                    </pre>
+                    <p>Usage: </p>
+                    <pre>
+                    <code class="language-pascal">
+console.log("arrayMax ", arrayMin(castle));
+                            </code>
+                    </pre>
+                    <p>Output: </p>
+                    <pre>
+                    <code class="language-pascal">
+2
+                            </code>
+                    </pre>
+                </div>
+                <div>
+                    <h3>Alternative way:</h3>
+                    <code>
+                        console.log("Math.min ", Math.min.apply(null, castle));
+                    </code>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <hr />
+            <h2>
+                Part 2: Aequilibrium | The Transformation Company
+            </h2>
+            <hr />
+            <div class="col-md-12">
+                <style>
+                    .rules{
+                        background-color:#eee;
+                        padding:15px;
+                        border-radius:15px;
+                    }
+                    .teams{
+                        font-weight:bold;
+                    }
+                    .transformer{
+                        color:#c7254e;
+                    }
+                    .gobattle,.clearbattle{
+                        background-color: #007AFF;
+                    }
+                    .hide{
+                        display:none;
+                    }
+                    #dscore,#ascore{
+                        width:50px;
+                        max-width:50px;
+                    }
+                </style>
+                <div class="row">
+                    <div class="team1 col-md-3">
+                        <h4 class="teams">Team: Soundwave </h4>
+                        <!--
+                        <input id="dscore" type="text" name="trans" >
+                            -->
+                        <span class="sw hide">Soundwave</span>
+                        <span class="D hide">D</span>
+                        <h4 class="transformer">Transformer: <input id="d_Decepticon" type="text" name="trans" value="Decepticon" class="form-control"></h4>
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>Strength</td>
+                                    <td><input id="d_str" type="text" name="str" value="9" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Intelligence</td>
+                                    <td><input id="d_int" type="text" name="int" value="9" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Speed</td>
+                                    <td><input id="d_sp" type="text" name="sp" value="2" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Endurance</td>
+                                    <td><input id="d_endur" type="text" name="endur" value="6" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Rank</td>
+                                    <td><input id="d_r" type="text" name="r" value="7" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Courage</td>
+                                    <td><input id="d_cour" type="text" name="cour" value="6" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Firepower</td>
+                                    <td><input id="d_fp" type="text" name="fp" value="6" class="form-control"></td>
+                                <tr>
+                                    <td>Skill</td>
+                                    <td><input id="d_sk" type="text" name="sk" value="10" class="form-control"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="team1 col-md-3">
+                        <h4 class="teams">Team: Bluestreak </h4>
+                        <!--
+                        <input id="ascore" type="text" name="trans">    
+                        -->
+                        <span class="bs hide">Bluestreak</span>
+                        <span class="A hide">A</span>
+                        <h4 class="transformer">Transformer: <input id="d_Autobot" type="text" name="trans" value="Autobot" class="form-control"></h4>
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>Strength</td>
+                                    <td><input id="a_str" type="text" name="str" value="6" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Intelligence</td>
+                                    <td><input id="a_int" type="text" name="int" value="6" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Speed</td>
+                                    <td><input id="a_sp" type="text" name="sp" value="7" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Endurance</td>
+                                    <td><input id="a_endur" type="text" name="endur" value="9" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Rank</td>
+                                    <td><input id="a_r" type="text" name="r" value="5" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Courage</td>
+                                    <td><input id="a_cour" type="text" name="cour" value="2" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Firepower</td>
+                                    <td><input id="a_fp" type="text" name="fp" value="9" class="form-control"></td>
+                                <tr>
+                                    <td>Skill</td>
+                                    <td><input id="a_sk" type="text" name="sk" value="7" class="form-control"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="battle_start col-md-6">
+                        <div class="rules">
+                            <!--
+                             <h3>Rule #1: </h3>
+                            <p>
+                                If any fighter is down 4 or more points of courage and 3 or more points of strength
+                                compared to their opponent, the opponent automatically wins the face-off regardless of
+                                overall rating (opponent has ran away)
+                            </p>
+                                -->
+                           <h3>Start battling!</h3>
+                            <a class="btn btn-info gobattle">Go battle</a>
+                            <a class="btn btn-info clearbattle">Clear battles</a>
+                        </div>
+                        <div class="results">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var cour_points = points($('#a_cour').val(), $('#d_cour').val());
+        var str_points = points($('#a_str').val(), $('#d_str').val());
+        var sk_points = points($('#a_sk').val(), $('#d_sk').val());
+        var a_or = getRating(
+                $('.bs').text(),
+                $('.A').text(),
+                $('#a_str').val(),
+                $('#a_int').val(),
+                $('#a_sp').val(),
+                $('#a_endur').val(),
+                $('#a_r').val(),
+                $('#a_cour').val(),
+                $('#a_fp').val(),
+                $('#a_sk').val());
+
+        var d_or = getRating(
+            $('.sw').text(),
+            $('.D').text(),
+            $('#d_str').val(),
+            $('#d_int').val(),
+            $('#d_sp').val(),
+            $('#d_endur').val(),
+            $('#d_r').val(),
+            $('#d_cour').val(),
+            $('#d_fp').val(),
+            $('#d_sk').val());
+       console.log("Autobot: ", a_or, "Decepticon: ", d_or);
+        $(function () {
+          //  $('#dscore').val(d_or);
+          //  $('#ascore').val(a_or);
+            $('.clearbattle').click(function () {
+                $('.Winner').remove();
+            });
+           
+            $('.gobattle').click(function () {
+                var cour_winning = battle(
+            $('.sw').text(),
+            $('.D').text(),
+            $('#d_cour').val(),
+            $('#d_str').val(),
+            $('#d_sk').val(),
+            $('#d_int').val(),
+            $('#d_sp').val(),
+            $('#d_endur').val(),
+            $('#d_r').val(),
+             $('#d_fp').val(),
+             $('#d_Decepticon').val(),
+             //
+            $('.bs').text(),
+            $('.A').text(),
+            $('#a_cour').val(),
+            $('#a_str').val(),
+            $('#a_sk').val(),
+            $('#a_int').val(),
+            $('#a_sp').val(),
+            $('#a_endur').val(),
+            $('#a_r').val(),
+            $('#a_fp').val(),
+            $('#d_Autobot').val()
+            );
+                console.log("winner is: ", cour_winning);
+               //console.log(cour_points,str_points,sk_points);
+                $('.results').append(
+                    "<div class='Winner'>"+
+                        "<p>"+cour_winning+"</p>"+
+                    "</div>"
+                    )
+            });
+            var transformer; /* Autobot of Decepticon */
+            //console.log($('#d_Decepticon').val());
+        });
+        function battle(team1, trans1, cour1, str1, sk1, int1, sp1, endur1, r1, fp1,name1, team2, trans2, cour2, str2, sk2, int2, sp2, endur2, r2, fp2,name2) {
+            //Team1 : Decepticon , Team 2 : Autobot
+            console.log(name1, name2);
+            var winner;
+            var auto_rating = getRating(team2, trans2, str2, int2, sp2, endur2, r2, cour2, fp2, sk2); //team 2
+            var dec_rating = getRating(team1, trans1, str1, int1, sp1, endur1, r1, cour1, fp1, sk1); //team 1
+            var team1score = getRating(team1, trans1, str1, int1, sp1, endur1, r1, cour1, fp1, sk1);
+            var team2score = getRating(team2, trans2, str2, int2, sp2, endur2, r2, cour2, fp2, sk2);
+            //down 4 or more courage && 3 or more strength
+            if (((parseInt(cour1) - parseInt(cour2)) >= cour_points) && ((parseInt(str1) - parseInt(str2)) >= str_points)) {
+                winner = "Winning team ("+trans1+"): "+team1  +" ---- 4 courage points more | 3 strength points more";
+            }else if (((parseInt(cour2) - parseInt(cour1)) >= cour_points) && ((parseInt(str2) - parseInt(str1)) >= str_points)) {
+                winner = "Winning team (" + trans2 + "): " + team2 + " ---- 4 courage points more | 3 strength points more";
+            }
+                //
+            //3 or more skill 
+            else if (((parseInt(sk1) - parseInt(sk2)) >= sk_points)) {
+                winner = "Winning team (" + trans1 + "): " + team1+ " ---- 3 skill points more";
+            }
+            else if (((parseInt(sk2) - parseInt(sk1)) >= sk_points)) {
+                winner = "Winning team (" + trans2 + "): " + team2 + " ---- 3 skill points more";
+            }
+            else if (getRating(team1, trans1, str1, int1, sp1, endur1, r1, cour1, fp1, sk1) > getRating(team2, trans2, str2, int2, sp2, endur2, r2, cour2, fp2, sk2)) {
+                winner = "Winning team (" + trans1 + "): " + team1 + " Overall score: " + dec_rating + " ---- points condition do not match (4 courage, 3 strength or 3 skills)";
+            }
+            else if (getRating(team1, trans1, str1, int1, sp1, endur1, r1, cour1, fp1, sk1) < getRating(team2, trans2, str2, int2, sp2, endur2, r2, cour2, fp2, sk2)) {
+                winner = "Winning team (" + trans2 + "): " + team2 + " Overall score: " + auto_rating + " ---- points condition do not match (4 courage, 3 strength or 3 skills)";
+            }
+            else if (getRating(team1, trans1, str1, int1, sp1, endur1, r1, cour1, fp1, sk1) == getRating(team2, trans2, str2, int2, sp2, endur2, r2, cour2, fp2, sk2)) {
+                winner = "All destroyed (Overall score: tie)" + " Team 1 score: " + team1score+ " | "+ " Team 2 score "+ team2score;
+            }
+            if (name1 == 'Predaking') {
+                winner = "Winning team (" + name1 + "): " + team1;
+            }
+            if (name2 == 'Optimus Prime') {
+                winner = "Winning team (" + name2 + "): " + team2;
+            }
+            if (name1 == 'Predaking' && name2 == 'Optimus Prime') {
+                winner = "All destroyed";
+            }
+            if (name1 == 'Predaking' && name2 == 'Predaking') {
+                winner = "All destroyed, duplicated transformers: "+name1;
+            }
+            if (name1 == 'Optimus Prime' && name2 == 'Optimus Prime') {
+                winner = "All destroyed, duplicated transformers: " + name1;
+            }
+            return winner;
+        }
+
+        function getRating(team, transformer, str, int, sp, endur, r, cour, fp, sk) {
+            var strength = str;
+            var intelligence = int;
+            var speed = sp;
+            var endurance = endur;
+            var rank = r;
+            var courage = cour;
+            var firepower = fp;
+            var skill = sk;
+            var overall_rating = parseInt(strength + intelligence + speed + endurance + rank + courage + firepower + skill);
+            var a = [
+                parseInt(strength),
+                parseInt(intelligence),
+                parseInt(speed),
+                parseInt(endurance),
+                parseInt(rank),
+                parseInt(courage),
+                parseInt(firepower),
+                parseInt(skill)];
+            var sum = a.reduce(function (a, b) { return a + b; }, 0);
+            return sum;
+        }
+        //function points(num1, num2){
+        //    return (num1 > num2)? num1-num2 : num2-num1
+        //}
+        function points(num1, num2) {
+            return Math.abs(num1 - num2);
+        }
+    </script>
+</body>
+</html>
